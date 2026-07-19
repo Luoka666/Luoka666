@@ -37,7 +37,7 @@ GPIO / EXTI / TIM / PWM / I2C / USART / SysTick / 单总线 · 有限状态机 (
 - **防误触设计** — RUN 状态下主动锁定菜单键
 - **软硬件联调** — 编写独立硬件测试用例定位并解决 GPIO 配置错误、电源轨断路等故障
 
-[>> 项目源文件（含完整踩坑记录）](https://github.com/Luoka666/STM32F103_Loka_Project/tree/main/Temperature_Humidity_Sensor_Alarm_System)
+[>> 项目源文件](https://github.com/Luoka666/STM32F103_Loka_Project/tree/main/Temperature_Humidity_Sensor_Alarm_System)
 
 ---
 
