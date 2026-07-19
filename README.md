@@ -1,8 +1,6 @@
 <div align="center">
 
-# Luoka
 
-嵌入式开发学习者 · 热衷从裸机寄存器到上位机可视化的完整闭环
 
 [![GitHub followers](https://img.shields.io/github/followers/Luoka666?style=social)](https://github.com/Luoka666)
 
@@ -23,7 +21,7 @@ GPIO / EXTI / TIM / PWM / I2C / USART / SysTick / 单总线 · 有限状态机 (
 
 ---
 
-### 精选项目
+### 主要项目
 
 #### 智能温湿度监测与报警系统
 
@@ -39,7 +37,7 @@ GPIO / EXTI / TIM / PWM / I2C / USART / SysTick / 单总线 · 有限状态机 (
 - **防误触设计** — RUN 状态下主动锁定菜单键
 - **软硬件联调** — 编写独立硬件测试用例定位并解决 GPIO 配置错误、电源轨断路等故障
 
-[>> 项目文档（含完整踩坑记录）](https://github.com/Luoka666/STM32F103_Loka_Project/tree/main/Temperature_Humidity_Sensor_Alarm_System)
+[>> 项目源文件（含完整踩坑记录）](https://github.com/Luoka666/STM32F103_Loka_Project/tree/main/Temperature_Humidity_Sensor_Alarm_System)
 
 ---
 
@@ -54,7 +52,7 @@ GPIO / EXTI / TIM / PWM / I2C / USART / SysTick / 单总线 · 有限状态机 (
 - **智能视图管理** — 用户查看历史数据时自动暂停滚动，一键跳回最新
 - **跨语言联调** — Python 上位机 × C 下位机，独立完成协议对齐与联调
 
-[>> 项目文档](https://github.com/Luoka666/upper_computer)
+[>> 项目源文件](https://github.com/Luoka666/upper_computer)
 
 ---
 
