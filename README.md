@@ -76,6 +76,7 @@ GPIO / EXTI / TIM / PWM / I2C / USART / SysTick / 单总线 · 有限状态机 (
 
 - [贪吃蛇](https://github.com/Luoka666/Hungry-Snake) — C 语言控制台游戏，含移动、食物生成、碰撞检测
 - [FreeRTOS 学习](https://github.com/Luoka666/FreeRTOS_Learning) — 任务调度与队列通信实战
+- [数据结构与算法](https://github.com/Luoka666/Data-Structures-and-Algorithms) — C11 + CMake，19 道题覆盖链表/树/图/DP 等 10 个分类
 
 ---
 
