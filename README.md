@@ -13,7 +13,7 @@
 ![C](https://img.shields.io/badge/C-主语言-5555ff?style=flat&logo=c)
 ![Python](https://img.shields.io/badge/Python-上位机开发-3776AB?style=flat&logo=python)
 ![STM32](https://img.shields.io/badge/STM32-F103C8T6-03234B?style=flat&logo=stmicroelectronics)
-![FreeRTOS](https://img.shields.io/badge/FreeRTOS-学习中-8cc63f?style=flat)
+![FreeRTOS](https://img.shields.io/badge/FreeRTOS-任务调度/队列通信-8cc63f?style=flat)
 ![Keil](https://img.shields.io/badge/Keil-MDK-aaaaaa?style=flat&logo=arm)
 ![Git](https://img.shields.io/badge/Git-版本管理-F05032?style=flat&logo=git)
 
@@ -25,19 +25,20 @@ GPIO / EXTI / TIM / PWM / I2C / USART / SysTick / 单总线 · 有限状态机 (
 
 #### 智能温湿度监测与报警系统
 
-[![STM32](https://img.shields.io/badge/STM32F103-标准库-blue?style=flat)](https://github.com/Luoka666/STM32F103_Loka_Project/tree/main/Temperature_Humidity_Sensor_Alarm_System)
+[![STM32](https://img.shields.io/badge/STM32-裸机版-blue?style=flat)](https://github.com/Luoka666/STM32F103_Loka_Project/tree/main/Temperature_Humidity_Sensor_Alarm_System_BareMetal)
+[![FreeRTOS](https://img.shields.io/badge/FreeRTOS-重构版-8cc63f?style=flat)](https://github.com/Luoka666/STM32F103_Loka_Project/tree/main/Temperature_Humidity_Sensor_Alarm_System_FreeRTOS)
 [![配套上位机](https://img.shields.io/badge/配套-Python上位机-green?style=flat)](https://github.com/Luoka666/upper_computer)
 
-> 从传感器驱动到 PC 端可视化，实现完整物联网数据闭环
+> 从传感器驱动到 PC 端可视化，裸机 + FreeRTOS 双版本，实现完整物联网数据闭环
 
 - **双层状态机** — 7 种系统状态，按键 → 状态跳转 → 行为执行三层解耦
+- **FreeRTOS 重构** — 传感器采集 / OLED 显示 / 报警拆分为独立 Task，队列通信
 - **非阻塞报警** — SysTick 毫秒中断驱动，LED + 蜂鸣器报警不阻塞主循环
 - **底层驱动** — 独立编写 DHT11 单总线、I2C OLED、USART 串口驱动
 - **环形缓冲区** — 历史数据存储与 UI 显示解耦
-- **防误触设计** — RUN 状态下主动锁定菜单键
 - **软硬件联调** — 编写独立硬件测试用例定位并解决 GPIO 配置错误、电源轨断路等故障
 
-[>> 项目源文件](https://github.com/Luoka666/STM32F103_Loka_Project/tree/main/Temperature_Humidity_Sensor_Alarm_System)
+[>> 项目文档（含完整踩坑记录）](https://github.com/Luoka666/STM32F103_Loka_Project/tree/main/Temperature_Humidity_Sensor_Alarm_System_FreeRTOS)
 
 ---
 
@@ -66,6 +67,7 @@ GPIO / EXTI / TIM / PWM / I2C / USART / SysTick / 单总线 · 有限状态机 (
 | 中断 | 红外传感器、旋转编码器 | EXTI 外部中断 |
 | 定时 | 定时器中断、PWM 呼吸灯、舵机 | TIM、PWM 占空比 |
 | 综合 | **温湿度监测与报警系统** | FSM + 多外设协同 + 软硬件联调 |
+| 进阶 | **温湿度系统 FreeRTOS 重构** | 多任务调度 + 队列通信 + Tick Hook |
 | 集成 | **Python 上位机** | 串口协议 + 数据可视化 |
 
 [>> 完整学习仓库（15 个项目）](https://github.com/Luoka666/STM32F103_Loka_Project)
