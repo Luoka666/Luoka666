@@ -1,89 +1,41 @@
-<div align="center">
+# Luoka · 嵌入式软件开发
 
-# Luoka
+你好，我是李佳乐，2027 届计算机科学与技术本科生，求职方向为嵌入式软件开发实习。
 
-[![GitHub followers](https://img.shields.io/github/followers/Luoka666?style=social)](https://github.com/Luoka666)
+目前主要使用 **C、STM32F103 和 FreeRTOS**，通过项目练习外设驱动、状态机、多任务通信与软硬件联调，并使用 Python 开发配套串口工具。
 
-</div>
+## 先看这两个项目
 
----
+| 项目 | 实现内容 | 推荐阅读入口 |
+| --- | --- | --- |
+| **STM32 温湿度监测与报警系统** | DHT11 采集、OLED 菜单、阈值报警、历史记录；裸机与 FreeRTOS 双版本 | [项目总览](https://github.com/Luoka666/STM32F103_Loka_Project) · [裸机版](https://github.com/Luoka666/STM32F103_Loka_Project/tree/main/Temperature_Humidity_Sensor_Alarm_System_BareMetal) · [FreeRTOS 版](https://github.com/Luoka666/STM32F103_Loka_Project/tree/main/Temperature_Humidity_Sensor_Alarm_System_FreeRTOS) |
+| **Python 串口可视化上位机** | 接收下位机数据，绘制温湿度双 Y 轴曲线，支持历史浏览和断线重连 | [使用方法与源码](https://github.com/Luoka666/upper_computer) |
 
-### 技术栈
+### 温湿度系统里重点做了什么
 
-![C](https://img.shields.io/badge/C-主语言-5555ff?style=flat&logo=c)
-![Python](https://img.shields.io/badge/Python-上位机开发-3776AB?style=flat&logo=python)
-![STM32](https://img.shields.io/badge/STM32-F103C8T6-03234B?style=flat&logo=stmicroelectronics)
-![FreeRTOS](https://img.shields.io/badge/FreeRTOS-任务调度/队列通信-8cc63f?style=flat)
-![Keil](https://img.shields.io/badge/Keil-MDK-aaaaaa?style=flat&logo=arm)
-![Git](https://img.shields.io/badge/Git-版本管理-F05032?style=flat&logo=git)
+- **裸机调度**：7 状态有限状态机，按键扫描、传感器采样与报警各自计时；非阻塞消抖避免长按占用主循环。
+- **多任务协作**：6 个 FreeRTOS 任务、4 条消息队列；使用互斥量保护 OLED 与历史记录访问。
+- **异常处理**：DHT11 电平等待增加超时；显示和报警队列覆盖旧值，历史队列满时淘汰最旧待处理数据，避免采集任务长期阻塞。
+- **联调记录**：记录 GPIO 时钟及端口配置、面包板电源轨、SysTick 延时冲突等问题的定位过程。
 
-GPIO / EXTI / TIM / PWM / I2C / USART / SysTick / 单总线 · 有限状态机 (FSM) / 非阻塞事件驱动 / 模块化分层设计
+下位机通过串口发送采样结果，上位机解析并显示，构成一套可以联合调试的监测系统。
 
----
+## 技术实践
 
-### 主要项目
+| 方向 | 项目中使用的技术 |
+| --- | --- |
+| MCU 与外设 | STM32F103C8T6、标准外设库、GPIO、USART、TIM、SysTick、软件 I2C、DHT11 单总线 |
+| 系统组织 | 有限状态机、非阻塞按键消抖、环形缓冲区、FreeRTOS 任务、队列、互斥量 |
+| PC 工具 | Python、PySerial、Matplotlib、串口数据解析 |
+| 开发与调试 | Keil MDK、CLion、Git、串口日志、独立硬件测试程序 |
 
-#### 智能温湿度监测与报警系统
+## 学习与练习仓库
 
-[![STM32](https://img.shields.io/badge/STM32-裸机版-blue?style=flat)](https://github.com/Luoka666/STM32F103_Loka_Project/tree/main/Temperature_Humidity_Sensor_Alarm_System_BareMetal)
-[![FreeRTOS](https://img.shields.io/badge/FreeRTOS-重构版-8cc63f?style=flat)](https://github.com/Luoka666/STM32F103_Loka_Project/tree/main/Temperature_Humidity_Sensor_Alarm_System_FreeRTOS)
-[![配套上位机](https://img.shields.io/badge/配套-Python上位机-green?style=flat)](https://github.com/Luoka666/upper_computer)
+- [STM32 外设练习](https://github.com/Luoka666/STM32F103_Loka_Project#外设练习索引)：GPIO、中断、定时器、PWM 和 OLED 等基础练习，与综合项目分开列出。
+- [FreeRTOS 学习](https://github.com/Luoka666/FreeRTOS_Learning)：实时操作系统的学习与实验记录。
+- [数据结构与算法](https://github.com/Luoka666/Data-Structures-and-Algorithms)：C 语言实现，使用 CMake 管理，按数据结构和算法分类整理。
+- [C 语言贪吃蛇](https://github.com/Luoka666/Hungry-Snake)：控制台游戏练习。
 
-> 从传感器驱动到 PC 端可视化，裸机 + FreeRTOS 双版本，实现完整物联网数据闭环
+## 联系方式
 
-- **双层状态机** — 7 种系统状态，按键 → 状态跳转 → 行为执行三层解耦
-- **FreeRTOS 重构** — 传感器采集 / OLED 显示 / 报警拆分为独立 Task，队列通信
-- **非阻塞报警** — SysTick 毫秒中断驱动，LED + 蜂鸣器报警不阻塞主循环
-- **底层驱动** — 独立编写 DHT11 单总线、I2C OLED、USART 串口驱动
-- **环形缓冲区** — 历史数据存储与 UI 显示解耦
-- **软硬件联调** — 编写独立硬件测试用例定位并解决 GPIO 配置错误、电源轨断路等故障
-
-[>> 项目文档（含完整踩坑记录）](https://github.com/Luoka666/STM32F103_Loka_Project/tree/main/Temperature_Humidity_Sensor_Alarm_System_FreeRTOS)
-
----
-
-#### Python 串口上位机
-
-[![Python](https://img.shields.io/badge/Python-3.8+-blue?style=flat)](https://github.com/Luoka666/upper_computer)
-
-> 接收 STM32 下位机数据，PC 端实时双 Y 轴动态曲线显示
-
-- **非阻塞串口读取** — `in_waiting` 轮询替代阻塞式 `readline()`，动画不卡顿
-- **断线自动重连** — 状态机管理连接状态，2 秒重试间隔，程序不退出
-- **智能视图管理** — 用户查看历史数据时自动暂停滚动，一键跳回最新
-- **跨语言联调** — Python 上位机 × C 下位机，独立完成协议对齐与联调
-
-[>> 项目源文件](https://github.com/Luoka666/upper_computer)
-
----
-
-### 学习路径
-
-| 阶段 | 项目 | 技能点 |
-|------|------|--------|
-| 入门 | LED 闪烁、流水灯、蜂鸣器 | GPIO 输出控制 |
-| 输入 | 按键控制、光敏传感器 | GPIO 输入、消抖、ADC |
-| 显示 | OLED 驱动 | I2C 通信 |
-| 中断 | 红外传感器、旋转编码器 | EXTI 外部中断 |
-| 定时 | 定时器中断、PWM 呼吸灯、舵机 | TIM、PWM 占空比 |
-| 综合 | **温湿度监测与报警系统** | FSM + 多外设协同 + 软硬件联调 |
-| 进阶 | **温湿度系统 FreeRTOS 重构** | 多任务调度 + 队列通信 + Tick Hook |
-| 集成 | **Python 上位机** | 串口协议 + 数据可视化 |
-
-[>> 完整学习仓库（15 个项目）](https://github.com/Luoka666/STM32F103_Loka_Project)
-
----
-
-### 其他项目
-
-- [贪吃蛇](https://github.com/Luoka666/Hungry-Snake) — C 语言控制台游戏，含移动、食物生成、碰撞检测
-- [FreeRTOS 学习](https://github.com/Luoka666/FreeRTOS_Learning) — 任务调度与队列通信实战
-- [数据结构与算法](https://github.com/Luoka666/Data-Structures-and-Algorithms) — C11 + CMake，19 道题覆盖链表/树/图/DP 等 10 个分类
-
----
-
-<div align="center">
-
-**AI 辅助开发** — 熟练使用 Claude Code、GitHub Copilot、ChatGPT 辅助编码、Review、调试与文档编写
-
-</div>
+邮箱：[3266380141@qq.com](mailto:3266380141@qq.com)
